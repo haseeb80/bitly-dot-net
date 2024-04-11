@@ -4,52 +4,66 @@
         <name>BitlyDotNET</name>
     </assembly>
     <members>
+        <member name="T:BitlyDotNET.Exceptions.Reason">
+            <summary>
+            Defines the possible reasons for the library to throw an exception
+            </summary>
+        </member>
+        <member name="F:BitlyDotNET.Exceptions.Reason.CallForbidden">
+            <summary>
+            The library was unable to initiate a call to the API due to a lack of permissions.
+            <para>
+            	Usually, this happens when a <see href="http://msdn.microsoft.com/en-us/library/system.net.webpermission.aspx">System.Net.WebPermission</see> is thrown by the framework.
+            	You might want to add the following line in your config files to resolve this issue:
+            	<code><trust level="Medium" originUrl="https?://api\.bit\.ly/.+" /></code>
+            </para>
+            </summary>
+        </member>
+        <member name="F:BitlyDotNET.Exceptions.Reason.MethodNotFound">
+            <summary>
+            The requested file/method could not be found on the remote server
+            </summary>
+        </member>
+        <member name="F:BitlyDotNET.Exceptions.Reason.UnableToParseResponse">
+            <summary>
+            The API returned data in an unexpected format
+            </summary>
+        </member>
+        <member name="T:BitlyDotNET.Exceptions.BitlyDotNETException">
+            <summary>
+            Represents an exception that can be thrown by the library when a critical
+            condition prevents a successful communication with the API.
+            </summary>
+        </member>
+        <member name="P:BitlyDotNET.Exceptions.BitlyDotNETException.Reason">
+            <summary>
+            Gets the reason behind the creation of this exception
+            </summary>
+        </member>
         <member name="T:BitlyDotNET.Implementations.BitlyService">
             <summary>
             Implements the IBitlyService interface
             </summary>
         </member>
-        <member name="T:BitlyDotNET.Interfaces.IBitlyService">
+        <member name="P:BitlyDotNET.Implementations.BitlyService.Login">
             <summary>
-            Defines the interface for communicating with the bit.ly API
+            Gets the Login name used to communicate with the bit.y API.
             </summary>
         </member>
-        <member name="M:BitlyDotNET.Interfaces.IBitlyService.Shorten(System.String,System.String@)">
+        <member name="P:BitlyDotNET.Implementations.BitlyService.ApiKey">
             <summary>
-            Encodes a long URL as a shorter one, put it in <paramref name="shortened"/> and returns the <see cref="T:BitlyDotNET.Interfaces.StatusCode">StatusCode</see> of the request.
+            Gets the API Key used to communicate with the bit.y API.
             </summary>
-            <param name="url">A long URL to shorten</param>
-            <param name="shortened">Contains a long URL if successful, <see langword="null">null</see> otherwise.</param>
-            <returns>The <see cref="T:BitlyDotNET.Interfaces.StatusCode">status code</see> of the request</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="url"/> is <see langword="null">null</see>.</exception>
-            <exception cref="T:System.ArgumentException"><paramref name="url"/> is not a well formed URL (see remarks).</exception>
-            <exception cref="T:BitlyDotNET.Exceptions.BitlyDotNETException">A critical error occured that prevented the function to succesfully contact the Bitly API (see remarks).</exception>
-            <remarks>
-            <para>
-            	When an exception of type <see cref="T:BitlyDotNET.Exceptions.BitlyDotNETException">BitlyDotNETException</see> is thrown, you can examine the <see cref="T:BitlyDotNET.Exceptions.Reason">Reason</see> member of the exception to further diagnose the problem.
-            </para>
-            <para>
-            	The parameter <paramref name="url"/> shouldn't be URL-escaped as a whole, but any parameters in the query string should be.
-            </para>
-            </remarks>
         </member>
-        <member name="M:BitlyDotNET.Interfaces.IBitlyService.Shorten(System.String)">
+        <member name="P:BitlyDotNET.Implementations.BitlyService.ApiVersion">
             <summary>
-            Encodes a long URL as a shorter one and returns it.
+            Gets the API Version used by the library to communicate with the bit.y API.
             </summary>
-            <param name="url">A long URL to shorten</param>
-            <returns>The short URL corresponding to <paramref name="url"/> if successful, <see langword="null">null</see> otherwise.</returns>
-            <exception cref="T:System.ArgumentNullException"><paramref name="url"/> is <see langword="null">null</see>.</exception>
-            <exception cref="T:System.ArgumentException"><paramref name="url"/> is not a well formed URL (see remarks).</exception>
-            <exception cref="T:BitlyDotNET.Exceptions.BitlyDotNETException">A critical error occured that prevented the function to succesfully contact the Bitly API (see remarks).</exception>
-            <remarks>
-            <para>
-            	When an exception of type <see cref="T:BitlyDotNET.Exceptions.BitlyDotNETException">BitlyDotNETException</see> is thrown, you can examine the <see cref="T:BitlyDotNET.Exceptions.Reason">Reason</see> member of the exception to further diagnose the problem.
-            </para>
-            <para>
-            	The parameter <paramref name="url"/> shouldn't be URL-escaped as a whole, but any parameters in the query string should be.
-            </para>
-            </remarks>
+        </member>
+        <member name="P:BitlyDotNET.Implementations.BitlyService.ApiRestUrl">
+            <summary>
+            Gets the base URL of the bit.ly REST API
+            </summary>
         </member>
         <member name="M:BitlyDotNET.Implementations.BitlyService.#ctor">
             <summary>
@@ -106,60 +120,19 @@
             </para>
             </remarks>
         </member>
-        <member name="P:BitlyDotNET.Implementations.BitlyService.Login">
+        <member name="P:BitlyDotNET.Interfaces.IBitlyResponse.StatusCode">
             <summary>
-            Gets the Login name used to communicate with the bit.y API.
+            The <see cref="P:BitlyDotNET.Interfaces.IBitlyResponse.StatusCode">status code</see> for this request
             </summary>
         </member>
-        <member name="P:BitlyDotNET.Implementations.BitlyService.ApiKey">
+        <member name="P:BitlyDotNET.Interfaces.IBitlyResponse.LongUrl">
             <summary>
-            Gets the API Key used to communicate with the bit.y API.
+            The long URL
             </summary>
         </member>
-        <member name="P:BitlyDotNET.Implementations.BitlyService.ApiVersion">
+        <member name="P:BitlyDotNET.Interfaces.IBitlyResponse.ShortUrl">
             <summary>
-            Gets the API Version used by the library to communicate with the bit.y API.
-            </summary>
-        </member>
-        <member name="P:BitlyDotNET.Implementations.BitlyService.ApiRestUrl">
-            <summary>
-            Gets the base URL of the bit.ly REST API
-            </summary>
-        </member>
-        <member name="T:BitlyDotNET.Exceptions.Reason">
-            <summary>
-            Defines the possible reasons for the library to throw an exception
-            </summary>
-        </member>
-        <member name="F:BitlyDotNET.Exceptions.Reason.CallForbidden">
-            <summary>
-            The library was unable to initiate a call to the API due to a lack of permissions.
-            <para>
-            	Usually, this happens when a <see href="http://msdn.microsoft.com/en-us/library/system.net.webpermission.aspx">System.Net.WebPermission</see> is thrown by the framework.
-            	You might want to add the following line in your config files to resolve this issue:
-            	<code><trust level="Medium" originUrl="https?://api\.bit\.ly/.+" /></code>
-            </para>
-            </summary>
-        </member>
-        <member name="F:BitlyDotNET.Exceptions.Reason.MethodNotFound">
-            <summary>
-            The requested file/method could not be found on the remote server
-            </summary>
-        </member>
-        <member name="F:BitlyDotNET.Exceptions.Reason.UnableToParseResponse">
-            <summary>
-            The API returned data in an unexpected format
-            </summary>
-        </member>
-        <member name="T:BitlyDotNET.Exceptions.BitlyDotNETException">
-            <summary>
-            Represents an exception that can be thrown by the library when a critical
-            condition prevents a successful communication with the API.
-            </summary>
-        </member>
-        <member name="P:BitlyDotNET.Exceptions.BitlyDotNETException.Reason">
-            <summary>
-            Gets the reason behind the creation of this exception
+            The shortened URL corresponding to <paramref name="LongUrl"/> or null if unsuccessful
             </summary>
         </member>
         <member name="T:BitlyDotNET.Interfaces.StatusCode">
@@ -215,6 +188,11 @@
         <member name="F:BitlyDotNET.Interfaces.StatusCode.PostError">
             <summary>
             There was a problem posting your request. Please try again.
+            </summary>
+        </member>
+        <member name="F:BitlyDotNET.Interfaces.StatusCode.RateLimitExceeded">
+            <summary>
+            You have exceeded your hourly rate limit for this method.
             </summary>
         </member>
         <member name="F:BitlyDotNET.Interfaces.StatusCode.PageNotFound">
@@ -356,6 +334,56 @@
             <summary>
             Invalid account type.
             </summary>
+        </member>
+        <member name="T:BitlyDotNET.Interfaces.IBitlyService">
+            <summary>
+            Defines the interface for communicating with the bit.ly API
+            </summary>
+        </member>
+        <member name="M:BitlyDotNET.Interfaces.IBitlyService.Shorten(System.String,System.String@)">
+            <summary>
+            Encodes a long URL as a shorter one, put it in <paramref name="shortened"/> and returns the <see cref="T:BitlyDotNET.Interfaces.StatusCode">StatusCode</see> of the request.
+            </summary>
+            <param name="url">A long URL to shorten</param>
+            <param name="shortened">Contains a long URL if successful, <see langword="null">null</see> otherwise.</param>
+            <returns>The <see cref="T:BitlyDotNET.Interfaces.StatusCode">status code</see> of the request</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="url"/> is <see langword="null">null</see>.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="url"/> is not a well formed URL (see remarks).</exception>
+            <exception cref="T:BitlyDotNET.Exceptions.BitlyDotNETException">A critical error occured that prevented the function to succesfully contact the Bitly API (see remarks).</exception>
+            <remarks>
+            <para>
+            	When an exception of type <see cref="T:BitlyDotNET.Exceptions.BitlyDotNETException">BitlyDotNETException</see> is thrown, you can examine the <see cref="T:BitlyDotNET.Exceptions.Reason">Reason</see> member of the exception to further diagnose the problem.
+            </para>
+            <para>
+            	The parameter <paramref name="url"/> shouldn't be URL-escaped as a whole, but any parameters in the query string should be.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:BitlyDotNET.Interfaces.IBitlyService.Shorten(System.String)">
+            <summary>
+            Encodes a long URL as a shorter one and returns it.
+            </summary>
+            <param name="url">A long URL to shorten</param>
+            <returns>The short URL corresponding to <paramref name="url"/> if successful, <see langword="null">null</see> otherwise.</returns>
+            <exception cref="T:System.ArgumentNullException"><paramref name="url"/> is <see langword="null">null</see>.</exception>
+            <exception cref="T:System.ArgumentException"><paramref name="url"/> is not a well formed URL (see remarks).</exception>
+            <exception cref="T:BitlyDotNET.Exceptions.BitlyDotNETException">A critical error occured that prevented the function to succesfully contact the Bitly API (see remarks).</exception>
+            <remarks>
+            <para>
+            	When an exception of type <see cref="T:BitlyDotNET.Exceptions.BitlyDotNETException">BitlyDotNETException</see> is thrown, you can examine the <see cref="T:BitlyDotNET.Exceptions.Reason">Reason</see> member of the exception to further diagnose the problem.
+            </para>
+            <para>
+            	The parameter <paramref name="url"/> shouldn't be URL-escaped as a whole, but any parameters in the query string should be.
+            </para>
+            </remarks>
+        </member>
+        <member name="M:BitlyDotNET.Interfaces.IBitlyService.Shorten(System.String[],BitlyDotNET.Interfaces.StatusCode@)">
+            <summary>
+            Encodes multiple long URLs as shorter ones
+            </summary>
+            <param name="longUrls">An array of urls to shorten</param>
+            <param name="statusCode">The <see cref="T:BitlyDotNET.Interfaces.StatusCode">status code</see> returned by the request</param>
+            <returns>An array of responses (should be in the same order they were received)</returns>
         </member>
     </members>
 </doc>

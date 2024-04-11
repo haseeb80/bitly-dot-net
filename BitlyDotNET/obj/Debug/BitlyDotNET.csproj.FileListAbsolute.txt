@@ -4,3 +4,10 @@ C:\projects\BitlyDotNET\BitlyDotNET\obj\Debug\ResolveAssemblyReference.cache
 C:\projects\BitlyDotNET\BitlyDotNET\obj\Debug\BitlyDotNET.dll
 C:\projects\BitlyDotNET\BitlyDotNET\obj\Debug\BitlyDotNET.pdb
 C:\projects\BitlyDotNET\BitlyDotNET\bin\Debug\BitlyDotNET.xml
+C:\Projects\GirHub\bitly-dot-net\BitlyDotNET\bin\Debug\BitlyDotNET.xml
+C:\Projects\GirHub\bitly-dot-net\BitlyDotNET\bin\Debug\BitlyDotNET.dll
+C:\Projects\GirHub\bitly-dot-net\BitlyDotNET\bin\Debug\BitlyDotNET.pdb
+C:\Projects\GirHub\bitly-dot-net\BitlyDotNET\obj\Debug\BitlyDotNET.csproj.AssemblyReference.cache
+C:\Projects\GirHub\bitly-dot-net\BitlyDotNET\obj\Debug\BitlyDotNET.csproj.CoreCompileInputs.cache
+C:\Projects\GirHub\bitly-dot-net\BitlyDotNET\obj\Debug\BitlyDotNET.dll
+C:\Projects\GirHub\bitly-dot-net\BitlyDotNET\obj\Debug\BitlyDotNET.pdb
